@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./server
+    container_name: my-backend
+    env_file: ./server/.env
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+
+  frontend:
+    build: ./client
+    container_name: my-frontend
+    environment:
+      - REACT_APP_API_URL=http://backend:8000
+    ports:
+      - "3000:80"
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo:6.0
+    container_name: my-mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
+
+networks:
+  app-network:
+    driver: bridge

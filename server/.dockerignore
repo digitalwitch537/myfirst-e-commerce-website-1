@@ -1,0 +1,15 @@
+node_modules/
+npm-debug.log
+.git
+.gitignore
+debug.log
+README.md
+.DS_Store
+coverage/
+.idea/
+.vscode/
+.eslintcache
+*.swp
+*.swo
+public/uploads/
+.env.example

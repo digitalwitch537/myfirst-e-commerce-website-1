@@ -1,4 +1,4 @@
-# Hayroo Project Demo
+# Veey Project Demo
 
 [![Alt text](https://img.youtube.com/vi/lXk14qt2D28/0.jpg)](https://www.youtube.com/watch?v=lXk14qt2D28)
 
@@ -50,7 +50,61 @@ To enable payment functionality, you need to configure your own Braintree API cr
    BRAINTREE_PRIVATE_KEY=your_private_key_here
    ```
 
-### Installing
+### Running with Docker (Recommended)
+
+The easiest way to run the entire application is using Docker Compose.
+
+#### Prerequisites
+- Docker installed on your system
+- Docker Compose installed
+
+#### Quick Start with Docker
+
+1. **Clone the repository and navigate to the project directory**
+   ```bash
+   git clone <your-repo-url>
+   cd Hayroo
+   ```
+
+2. **Start all services (MongoDB, Server, Client)**
+   ```bash
+   docker-compose up
+   ```
+
+3. **Access the application**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8000
+   - MongoDB: localhost:27017
+
+#### Docker Services Included
+
+- **MongoDB**: Database service with persistent data
+- **Server**: Node.js backend API
+- **Client**: React frontend served by Nginx
+
+#### Environment Configuration
+
+The Docker setup includes default environment variables. For production deployment:
+
+1. Update `docker-compose.yml` with your production values
+2. Use Docker secrets for sensitive data
+3. Configure proper MongoDB credentials
+
+#### Building Individual Services
+
+```bash
+# Build client only
+docker build -t hayroo-client ./client
+
+# Build server only
+docker build -t hayroo-server ./server
+
+# Run individual services
+docker run -p 3000:80 hayroo-client
+docker run -p 8000:8000 -e DATABASE=mongodb://localhost:27017/myapp hayroo-server
+```
+
+### Manual Installation (Alternative)
 
 Installing NPM modules on both client and server folders
 
@@ -64,7 +118,7 @@ cd client && npm install
 cd server && npm install
 ```
 
-### Running the app
+### Running the app manually
 
 Open a terminal on server directory
 
@@ -79,6 +133,7 @@ npm run start
 ```
 
 Access the web app at http://localhost:3000/
+
 
 ### Deploying the backend server to render
 
